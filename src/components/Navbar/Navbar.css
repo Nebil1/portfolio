@@ -37,3 +37,14 @@
     margin-left: 0.8em;
   }
 }
+
+.navbar__link {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar__link:hover {
+  color: #6c63ff;
+  transform: scale(1.1);
+}

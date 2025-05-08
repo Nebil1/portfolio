@@ -1,17 +1,35 @@
-import { useContext, useState } from 'react'
-import Brightness2Icon from '@material-ui/icons/Brightness2'
-import WbSunnyRoundedIcon from '@material-ui/icons/WbSunnyRounded'
-import MenuIcon from '@material-ui/icons/Menu'
-import CloseIcon from '@material-ui/icons/Close'
+import { useContext, useState, useEffect } from 'react'
+import Brightness2Icon from '@mui/icons-material/Brightness2' // Updated to MUI v5
+import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded' // Updated to MUI v5
+import MenuIcon from '@mui/icons-material/Menu' // Updated to MUI v5
+import CloseIcon from '@mui/icons-material/Close' // Updated to MUI v5
 import { ThemeContext } from '../../contexts/theme'
 import { projects, skills, contact } from '../../portfolio'
 import './Navbar.css'
 
-const Navbar = () => {
+function Navbar() {
   const [{ themeName, toggleTheme }] = useContext(ThemeContext)
   const [showNavList, setShowNavList] = useState(false)
 
   const toggleNavList = () => setShowNavList(!showNavList)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('section');
+      const navbarLinks = document.querySelectorAll('.navbar__link');
+
+      sections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
+          navbarLinks.forEach((link) => link.classList.remove('active'));
+          navbarLinks[index].classList.add('active');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <nav className='center nav'>
@@ -24,7 +42,7 @@ const Navbar = () => {
             <a
               href='#projects'
               onClick={toggleNavList}
-              className='link link--nav'
+              className='link link--nav navbar__link'
             >
               Projects
             </a>
@@ -36,7 +54,7 @@ const Navbar = () => {
             <a
               href='#skills'
               onClick={toggleNavList}
-              className='link link--nav'
+              className='link link--nav navbar__link'
             >
               Skills
             </a>
@@ -48,7 +66,7 @@ const Navbar = () => {
             <a
               href='#contact'
               onClick={toggleNavList}
-              className='link link--nav'
+              className='link link--nav navbar__link'
             >
               Contact
             </a>

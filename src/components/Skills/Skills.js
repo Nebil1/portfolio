@@ -2,11 +2,11 @@ import uniqid from 'uniqid'
 import { skills } from '../../portfolio'
 import './Skills.css'
 
-const Skills = () => {
+function Skills() {
   if (!skills.length) return null
 
   return (
-    <section className='section skills' id='skills'>
+    <section className='section skills' id='skills' data-aos='fade-up'>
       <h2 className='section__title'>Skills</h2>
       <ul className='skills__list'>
         {skills.map((skill) => (

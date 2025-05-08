@@ -29,6 +29,22 @@
   margin-right: 1em;
 }
 
+.about__cursor {
+  display: inline-block;
+  width: 1ch;
+  animation: blink 1s steps(2, start) infinite;
+  color: inherit;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
 @media (max-width: 600px) {
   .app .about {
     align-items: flex-start;

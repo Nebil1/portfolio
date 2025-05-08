@@ -10,3 +10,7 @@
 .skills__list-item {
   margin: 0.5em;
 }
+
+.skills {
+  margin-bottom: 5rem; /* Increased spacing below the Skills section */
+}

@@ -1,9 +1,9 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types'
 
 const ThemeContext = createContext()
 
-const ThemeProvider = ({ children }) => {
+function ThemeProvider({ children }) {
   const [themeName, setThemeName] = useState('light')
 
   useEffect(() => {
@@ -15,20 +15,21 @@ const ThemeProvider = ({ children }) => {
   }, [])
 
   const toggleTheme = () => {
-    const name = themeName === 'dark' ? 'light' : 'dark'
-    localStorage.setItem('themeName', name)
-    setThemeName(name)
-  }
+    setThemeName((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
 
-  return (
-    <ThemeContext.Provider value={[{ themeName, toggleTheme }]}>
-      {children}
-    </ThemeContext.Provider>
-  )
+ // Memoize the context value so it doesn't change unnecessarily
+ const value = useMemo(() => [{ themeName, toggleTheme }], [themeName]);
+
+ return (
+   <ThemeContext.Provider value={value}>
+     {children}
+   </ThemeContext.Provider>
+ );
 }
 
 ThemeProvider.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export { ThemeProvider, ThemeContext }
+export { ThemeContext, ThemeProvider };
