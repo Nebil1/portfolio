@@ -81,6 +81,20 @@ main {
   color: var(--clr-fg);
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  overflow-x: hidden;
+}
+
+.section {
+  scroll-snap-align: start;
+  height: 100vh;
+}
+
+
 .btn {
   display: block;
   cursor: pointer;
