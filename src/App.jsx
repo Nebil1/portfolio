@@ -48,11 +48,18 @@ function App() {
       <Header />
 
       <main>
-        <About />
-        <Projects />
-        <Skills />
-        <Contact />
-  
+        <div className='section'>
+          <About />
+        </div>
+        <div className='section'>
+          <Projects />
+        </div>
+        <div className='section'>
+          <Skills />
+        </div>
+        <div className='section'>
+          <Contact />
+        </div>
       </main>
 
       <ScrollToTop />

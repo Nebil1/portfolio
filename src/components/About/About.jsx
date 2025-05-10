@@ -11,7 +11,25 @@ function About() {
   const [animatedText, setAnimatedText] = useState('');
 
   useEffect(() => {
-    setAnimatedText(`Hi, I am ${name}`); // Directly set the full text without animations
+    if (!name || typeof name !== 'string') {
+      setAnimatedText(''); // Reset animatedText if name is invalid
+      return; // Exit early if name is invalid
+    }
+
+    const text = `Hi, I am ${name}`;
+    let index = 0;
+    setAnimatedText(''); // Start with an empty string
+
+    const timer = setInterval(() => {
+      if (index < text.length) {
+        setAnimatedText((prev) => prev + text[index]);
+        index += 1;
+      } else {
+        clearInterval(timer); // Stop the timer when the text is fully displayed
+      }
+    }, 100);
+
+    return () => clearInterval(timer); // Cleanup the timer on unmount
   }, [name]);
 
   return (
