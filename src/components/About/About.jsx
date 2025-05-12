@@ -13,7 +13,7 @@ function About() {
   useEffect(() => {
     if (!name || typeof name !== 'string') {
       setAnimatedText(''); // Reset animatedText if name is invalid
-      return; // Exit early if name is invalid
+      return undefined; // Explicitly return undefined for consistent-return
     }
 
     const text = `Hi, I am ${name}`;
@@ -29,7 +29,7 @@ function About() {
       }
     }, 100);
 
-    return () => clearInterval(timer); // Cleanup the timer on unmount
+    return () => { clearInterval(timer); } // Cleanup the timer on unmount
   }, [name]);
 
   return (
