@@ -1,85 +1,83 @@
 import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import { useEffect, useState } from 'react';
-import { Parallax } from 'react-parallax';
+// import { Parallax } from 'react-parallax'; 
 import { about } from '../../portfolio'
 import './About.css'
 
-
 function About() {
-  const { name, role, description, resume, social } = about;
+  const { name = '', role, description, resume, social } = about;
   const [animatedText, setAnimatedText] = useState('');
 
   useEffect(() => {
+    const text = name && typeof name === 'string'
+      ? `Hi, I am ${name}`
+      : 'Hi, I am';
+
+    let index = 0;
+    setAnimatedText('');
+
     if (!name || typeof name !== 'string') {
-      setAnimatedText(''); // Reset animatedText if name is invalid
-      return undefined; // Explicitly return undefined for consistent-return
+      setAnimatedText('Hi, I am');
+      return undefined;
     }
 
-    const text = `Hi, I am ${name}`;
-    let index = 0;
-    setAnimatedText(''); // Start with an empty string
+    const interval = setInterval(() => {
+      setAnimatedText((prev) => {
+       if (index < text.length) {
+       const next = prev + text[index];
+       index += 1; // Use operator assignment
+       return next;
+  }
+        clearInterval(interval);
+        return prev;
+      });
+    }, 80);
 
-    const timer = setInterval(() => {
-      if (index < text.length) {
-        setAnimatedText((prev) => prev + text[index]);
-        index += 1;
-      } else {
-        clearInterval(timer); // Stop the timer when the text is fully displayed
-      }
-    }, 100);
-
-    return () => { clearInterval(timer); } // Cleanup the timer on unmount
+    return () => {
+      clearInterval(interval);
+    };
   }, [name]);
 
   return (
-    <Parallax bgImage='/path-to-your-background-image.jpg' strength={300}>
-      <div className='about center'>
-        {name && (
-          <h1>
-            <span className='about__name'>{animatedText}</span>
-            <span className='about__cursor'>&nbsp;|</span>
-          </h1>
+    <section className="about center">
+      <h1>
+        <span className="about__name">{animatedText}</span>
+      </h1>
+      {role && <h2 className="about__role">{role}</h2>}
+      {description && <p className="about__desc">{description}</p>}
+      <div className="about__contact center">
+        {resume && (
+          <a href={resume} target="_blank" rel="noopener noreferrer">
+            <span type="button" className="btn btn--outline">
+              resume
+            </span>
+          </a>
         )}
-
-        {role && <h2 className='about__role'>A {role}.</h2>}
-        <p className='about__desc'>{description && description}</p>
-
-        <div className='about__contact center'>
-          {resume && (
-            <a href={resume}>
-              <span type='button' className='btn btn--outline'>
-                Resume
-              </span>
-            </a>
-          )}
-
-          {social && (
-            <>
-              {social.github && (
-                <a
-                  href={social.github}
-                  aria-label='github'
-                  className='link link--icon'
-                >
-                  <GitHubIcon />
-                </a>
-              )}
-
-              {social.linkedin && (
-                <a
-                  href={social.linkedin}
-                  aria-label='linkedin'
-                  className='link link--icon'
-                >
-                  <LinkedInIcon />
-                </a>
-              )}
-            </>
-          )}
-        </div>
+        {social?.github && (
+          <a
+            href={social.github}
+            aria-label="github"
+            className="link link--icon"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <GitHubIcon />
+          </a>
+        )}
+        {social?.linkedin && (
+          <a
+            href={social.linkedin}
+            aria-label="linkedin"
+            className="link link--icon"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <LinkedInIcon />
+          </a>
+        )}
       </div>
-    </Parallax>
+    </section>
   );
 }
 

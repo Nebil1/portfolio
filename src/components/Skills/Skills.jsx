@@ -1,12 +1,23 @@
 import uniqid from 'uniqid'
+import { motion } from 'framer-motion';
 import { skills } from '../../portfolio'
 import './Skills.css'
+
+
 
 function Skills() {
   if (!skills.length) return null
 
   return (
-    <section className='section skills' id='skills' data-aos='fade-up'>
+    <motion.section
+      className='section skills'
+      id='skills'
+      data-aos='fade-up'
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+    >
       <h2 className='section__title'>Skills</h2>
       <ul className='skills__list'>
         {skills.map((skill) => (
@@ -15,7 +26,7 @@ function Skills() {
           </li>
         ))}
       </ul>
-    </section>
+    </motion.section>
   )
 }
 

@@ -9,9 +9,7 @@ import Skills from './components/Skills/Skills';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
-import { contact } from './portfolio';
 import './App.css';
-
 
 function App() {
   const context = useContext(ThemeContext);

@@ -21,8 +21,12 @@ function Navbar() {
       sections.forEach((section, index) => {
         const rect = section.getBoundingClientRect();
         if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
-          navbarLinks.forEach((link) => link.classList.remove('active'));
-          navbarLinks[index].classList.add('active');
+          navbarLinks.forEach((link) => {
+            if (link) link.classList.remove('active'); // Ensure link exists
+          });
+          if (navbarLinks[index]) {
+            navbarLinks[index].classList.add('active'); // Only add if exists
+          }
         }
       });
     };

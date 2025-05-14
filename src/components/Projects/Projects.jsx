@@ -1,10 +1,10 @@
-import uniqid from 'uniqid'
-import { projects } from '../../portfolio'
-import ProjectContainer from '../ProjectContainer/ProjectContainer'
-import './Projects.css'
+import uniqid from 'uniqid';
+import { projects } from '../../portfolio';
+import ProjectContainer from '../ProjectContainer/ProjectContainer';
+import './Projects.css';
 
 function Projects() {
-  if (!projects.length) return null
+  if (!projects.length) return null;
 
   return (
     <section className='section projects' id='projects' data-aos='fade-up'>
@@ -15,7 +15,7 @@ function Projects() {
         ))}
       </div>
     </section>
-  )
+  );
 }
 
-export default Projects
+export default Projects;
