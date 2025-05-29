@@ -17,6 +17,7 @@ function Skills() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: true }}
+      style={{ minHeight: '50vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
     >
       <h2 className='section__title'>Skills</h2>
       <ul className='skills__list'>

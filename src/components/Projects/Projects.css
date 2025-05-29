@@ -5,4 +5,5 @@
   grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
   grid-gap: 2em;
   background-attachment: fixed;
+  margin-bottom: 0; /* Remove extra space below the grid */
 }

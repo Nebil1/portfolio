@@ -23,8 +23,12 @@ function App() {
 
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Animation duration in milliseconds
-      once: true, // Whether animation should happen only once
+      duration: 1200, // Smoother, slightly longer animations
+      once: false, // Allow animations to repeat on scroll up/down
+      easing: 'ease-in-out-cubic', // Smoother easing
+      offset: 80, // Trigger animations a bit earlier
+      mirror: true, // Animate out while scrolling past
+      anchorPlacement: 'top-bottom', // More natural trigger
     });
   }, []);
 

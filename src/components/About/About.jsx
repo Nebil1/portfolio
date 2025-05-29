@@ -1,48 +1,65 @@
 import GitHubIcon from '@mui/icons-material/GitHub'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import { useEffect, useState } from 'react';
-// import { Parallax } from 'react-parallax'; 
 import { about } from '../../portfolio'
 import './About.css'
 
 function About() {
   const { name = '', role, description, resume, social } = about;
   const [animatedText, setAnimatedText] = useState('');
+  const [displayIndex, setDisplayIndex] = useState(0);
+  const [showCursor, setShowCursor] = useState(true);
+  const text = name && typeof name === 'string' ? `Hi, I am ${name}` : 'Hi, I am';
 
   useEffect(() => {
-    const text = name && typeof name === 'string'
-      ? `Hi, I am ${name}`
-      : 'Hi, I am';
-
-    let index = 0;
+    setDisplayIndex(0);
     setAnimatedText('');
-
     if (!name || typeof name !== 'string') {
       setAnimatedText('Hi, I am');
-      return undefined;
+      return;
     }
-
     const interval = setInterval(() => {
-      setAnimatedText((prev) => {
-       if (index < text.length) {
-       const next = prev + text[index];
-       index += 1; // Use operator assignment
-       return next;
-  }
-        clearInterval(interval);
-        return prev;
+      setDisplayIndex((prev) => {
+        if (prev + 1 > text.length) {
+          clearInterval(interval);
+          return text.length;
+        }
+        return prev + 1;
       });
-    }, 80);
-
+    }, 180);
+    const cursorInterval = setInterval(() => {
+      setShowCursor((prev) => !prev);
+    }, 500);
     return () => {
       clearInterval(interval);
+      clearInterval(cursorInterval);
     };
   }, [name]);
 
+  useEffect(() => {
+    setAnimatedText(text.slice(0, displayIndex));
+  }, [displayIndex, text]);
+
+  // Split animatedText for smooth letter fade-in, preserve spaces
   return (
-    <section className="about center">
+    <section className="about center" id="about">
       <h1>
-        <span className="about__name">{animatedText}</span>
+        <span className="about__name">
+          {animatedText.split('').map((char, i) => (
+            <span
+              key={i}
+              style={{
+                display: 'inline-block',
+                opacity: 1,
+                whiteSpace: char === ' ' ? 'pre' : 'normal',
+                transition: 'opacity 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1)'
+              }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </span>
+          ))}
+          <span className="about__cursor" style={{ opacity: showCursor ? 1 : 0 }}>|</span>
+        </span>
       </h1>
       {role && <h2 className="about__role">{role}</h2>}
       {description && <p className="about__desc">{description}</p>}

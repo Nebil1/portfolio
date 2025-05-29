@@ -28,19 +28,26 @@ main {
   max-width: 1100px;
   width: 95%;
   margin: 0 auto;
+  scroll-snap-type: y proximity; /* Use proximity for a less strict, smoother snap */
 }
 
 .section {
   margin-top: 2em;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   padding-top: 1em;
   padding-bottom: 1em;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal; /* Less forceful snap, allows for more natural scroll */
 }
 
 .section__title {
   text-align: center;
   margin-bottom: 1.5em;
   text-transform: uppercase;
+}
+
+.section, .projects {
+  scroll-margin-top: 160px; /* Adjust this value to match your header height */
 }
 
 .center {
@@ -192,14 +199,13 @@ html, body {
 }
 
 .projects {
-  margin-bottom: 0; /* Remove extra margin below projects */
+  margin-bottom: 0.5em; /* Further reduce gap below projects section */
   margin-top: 2em; /* Adjust gap above projects section */
-  margin-bottom: 3em; /* Adjust gap below projects section */
 }
 
 .skills {
   margin-top: 0; /* Remove extra margin above skills */
-  margin-top: 1.5em; /* Adjust gap above skills section */
+  margin-top: 0.5em; /* Adjust gap above skills section */
   margin-bottom: 2.5em; /* Adjust gap below skills section */
 }
 
@@ -223,7 +229,7 @@ html, body {
 }
 
 .projects .section__title {
-  margin-bottom: 1em; /* Specific adjustment for projects section title */
+  margin-bottom: 2em; /* Increased gap between Projects title and contents */
 }
 
 .skills .section__title {

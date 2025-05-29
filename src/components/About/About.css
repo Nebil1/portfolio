@@ -5,10 +5,11 @@
 
 .about__name {
   color: var(--clr-primary);
+  margin-bottom: 1.0em;
 }
 
 .about__role {
-  margin-top: 1.2em;
+  margin-top: 1.9em;
 }
 
 .about__desc {
@@ -38,7 +39,7 @@
 
 @keyframes blink {
   0%, 100% {
-    opacity: 1;
+    opacity: 0.8;
   }
   50% {
     opacity: 0;

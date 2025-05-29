@@ -1,5 +1,5 @@
 .skills__list {
-  max-width: 450px;
+  max-width: 500px;
   width: 95%;
   margin: 0 auto;
   display: flex;
@@ -12,5 +12,13 @@
 }
 
 .skills {
-  margin-bottom: 5rem; /* Increased spacing below the Skills section */
+  margin-bottom: 1.5rem; /* Reduce spacing below the Skills section */
+  margin-top: 0; /* Remove extra space above the Skills section */
+   /* Remove min-height, padding, or extra margin if inherited */
+}
+
+/* Remove min-height from .section:not(:first-child) for skills section only */
+.section.skills {
+  min-height: unset;
+  padding-top: 0;
 }
